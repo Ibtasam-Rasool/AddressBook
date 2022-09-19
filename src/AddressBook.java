@@ -12,17 +12,19 @@ public class AddressBook {
         buddyList.add(ks);
     }
 
-    public void addBuddy(String name, String address, String number){
-        BuddyInfo newBuddy = new BuddyInfo(name, address, number);
+    public void addBuddy(BuddyInfo newBuddy){
         buddyList.add(newBuddy);
     }
 
-    public void removeBuddy(String name){
-        buddyList.removeIf(buddy -> buddy.getName().equals(name));
+    public void removeBuddy(BuddyInfo noBuddy){
+        buddyList.removeIf(buddy -> buddy.getName().equals(noBuddy.getName()));
     }
 
     public static void main(String[] args) {
-        System.out.println("Address Book");
+        BuddyInfo newBuddy = new BuddyInfo("Brun", "Colonel By", "3213324454");
+        AddressBook book = new AddressBook();
+        book.addBuddy(newBuddy);
+        book.removeBuddy(newBuddy);
     }
 
 
