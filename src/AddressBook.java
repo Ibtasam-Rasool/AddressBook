@@ -25,7 +25,7 @@ public class AddressBook {
         AddressBook book = new AddressBook();
         book.addBuddy(newBuddy);
         book.removeBuddy(newBuddy);
-        System.out.println("testSlatt");
+        System.out.println("testSlatt 123");
     }
 
 
