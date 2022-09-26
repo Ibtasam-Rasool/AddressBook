@@ -23,6 +23,7 @@ public class AddressBook {
         BuddyInfo mahad = new BuddyInfo("Mahad", "Atlanta", "4333321326");
         book.addBuddy(mahad);
         book.removeBuddy(mahad);
+        System.out.println("t1");
 
 
     }
