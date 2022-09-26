@@ -18,6 +18,10 @@ public class AddressBook {
         buddyList.removeIf(buddy -> buddy.getName().equals(noBuddy.getName()));
     }
 
+    public void testMethod(){
+        System.out.println("new method");
+    }
+
     public static void main(String[] args) {
         AddressBook book = new AddressBook();
         BuddyInfo mahad = new BuddyInfo("Mahad", "Atlanta", "4333321326");
