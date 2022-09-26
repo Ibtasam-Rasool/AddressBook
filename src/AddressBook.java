@@ -5,15 +5,13 @@ public class AddressBook {
 
     public AddressBook(){
         buddyList = new ArrayList<BuddyInfo>();
-        BuddyInfo mahad = new BuddyInfo("Mahad", "Atlanta", "4333321326");
-        BuddyInfo ks = new BuddyInfo("slime", "J", "232342354345");
-
-        buddyList.add(mahad);
-        buddyList.add(ks);
     }
 
     public void addBuddy(BuddyInfo newBuddy){
-        buddyList.add(newBuddy);
+
+        if(newBuddy != null){
+            buddyList.add(newBuddy);
+        }
     }
 
     public void removeBuddy(BuddyInfo noBuddy){
@@ -21,15 +19,12 @@ public class AddressBook {
     }
 
     public static void main(String[] args) {
-        BuddyInfo newBuddy = new BuddyInfo("Brun", "Colonel By", "3213324454");
         AddressBook book = new AddressBook();
-        book.addBuddy(newBuddy);
-        book.removeBuddy(newBuddy);
-        System.out.println("testSlatt 123");
+        BuddyInfo mahad = new BuddyInfo("Mahad", "Atlanta", "4333321326");
+        book.addBuddy(mahad);
+        book.removeBuddy(mahad);
+
+
     }
-
-
-
-
 
 }
