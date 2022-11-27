@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class BuddyInfo {
 
     private String name;
@@ -17,10 +19,23 @@ public class BuddyInfo {
         this.number = number;
     }
 
+    public static BuddyInfo importBuddyInfo(String buddyInfoString){
+        Scanner s = new Scanner(buddyInfoString).useDelimiter("#");
+        return new BuddyInfo(s.next(), s.next(), s.next());
+
+    }
+
+
     @Override
     public String toString() {
         return getName();
     }
+
+
+    public String toOutPutString() {
+        return getName() + "#" + getAddress() + "#" + getPhone();
+    }
+
 
     public String getName() {
         return name;

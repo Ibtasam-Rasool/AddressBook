@@ -19,18 +19,26 @@ public class AddressBookFrame extends JFrame implements ListDataListener {
         JMenuBar menuBar = new JMenuBar();
         this.setJMenuBar(menuBar);
 
+        JMenu fileMenu = new JMenu("File");
         JMenu addressBookMenu = new JMenu("Address Book");
         JMenu buddyInfoMenu = new JMenu("Buddy Info");
 
+        menuBar.add(fileMenu);
         menuBar.add(addressBookMenu);
         menuBar.add(buddyInfoMenu);
 
-        JMenuItem removeOption = new JMenuItem("REMOVE SELECTED BUDDY");
-        JMenuItem addBuddy = new JMenuItem("ADD BUDDY");
-        JMenuItem viewBuddy = new JMenuItem("VIEW SELECTED BUDDY INFO");
+
+        JMenuItem exportOption = new JMenuItem("Export");
+        JMenuItem importOption = new JMenuItem("Import");
+        JMenuItem removeOption = new JMenuItem("Remove Selected Buddy");
+        JMenuItem addBuddy = new JMenuItem("Add Buddy");
+        JMenuItem viewBuddy = new JMenuItem("View Selected Buddy Info");
+
         addressBookMenu.add(removeOption);
         addressBookMenu.add(viewBuddy);
         buddyInfoMenu.add(addBuddy);
+        fileMenu.add(exportOption);
+        fileMenu.add(importOption);
 
         buddyInfoJList.addListSelectionListener(e -> addressBook.setSelectedBuddyInfo(buddyInfoJList.getSelectedValue()));
         removeOption.addActionListener(e -> addressBook.removeBuddy());
@@ -68,6 +76,26 @@ public class AddressBookFrame extends JFrame implements ListDataListener {
             }
 
         });
+        exportOption.addActionListener(e -> {
+
+            try {
+                addressBook.save(JOptionPane.showInputDialog(this, "Please Enter FileName"));
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+
+
+        });
+        importOption.addActionListener(e -> {
+            String fileName = (JOptionPane.showInputDialog(this, "Please Enter FileName To Import From"));
+            try {
+                addressBook.makeCurrentImported(AddressBook.importAddressBook(fileName));
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+
+        });
+
 
         this.setSize(400, 400);
         this.setVisible(true);
