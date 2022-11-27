@@ -17,8 +17,14 @@ public class BuddyInfo {
         this.number = number;
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
 
-
+    public String getName() {
+        return name;
+    }
 
     public static void main(String[] args) {
         BuddyInfo buddy = new BuddyInfo("Nabeel Hesa", "None", "None");
@@ -26,8 +32,4 @@ public class BuddyInfo {
 
     }
 
-
-    public String getName() {
-        return name;
-    }
 }

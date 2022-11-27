@@ -1,34 +1,39 @@
+import javax.swing.*;
 import java.util.*;
 
-public class AddressBook {
-    ArrayList<BuddyInfo> buddyList;
+public class AddressBook extends DefaultListModel<BuddyInfo> {
+
+    private BuddyInfo selectedBuddyInfo;
+    private boolean isBuddySelected;
 
     public AddressBook(){
-        buddyList = new ArrayList<BuddyInfo>();
+        super();
+        isBuddySelected = false;
     }
 
     public void addBuddy(BuddyInfo newBuddy){
+        addElement(newBuddy);
+    }
 
-        if(newBuddy != null){
-            buddyList.add(newBuddy);
+    public void removeBuddy(){
+
+        if(isBuddySelected) {
+            removeElement(selectedBuddyInfo);
+            isBuddySelected = false;
         }
     }
 
-    public void removeBuddy(BuddyInfo noBuddy){
-        buddyList.removeIf(buddy -> buddy.getName().equals(noBuddy.getName()));
-    }
-
-    public void testMethod(){
-        System.out.println("new method");
+    public void setSelectedBuddyInfo(BuddyInfo buddy){
+        selectedBuddyInfo = buddy;
+        isBuddySelected = true;
     }
 
     public static void main(String[] args) {
+
         AddressBook book = new AddressBook();
         BuddyInfo mahad = new BuddyInfo("Mahad", "Atlanta", "4333321326");
         book.addBuddy(mahad);
-        book.removeBuddy(mahad);
-        System.out.println("this change was made on github");
-
+        System.out.println(book);
 
     }
 
