@@ -23,6 +23,13 @@ public class AddressBook extends DefaultListModel<BuddyInfo> {
         }
     }
 
+    public BuddyInfo getSelectedBuddy(){
+        if(isBuddySelected) {
+            return selectedBuddyInfo;
+        }
+        return null;
+    }
+
     public void setSelectedBuddyInfo(BuddyInfo buddy){
         selectedBuddyInfo = buddy;
         isBuddySelected = true;

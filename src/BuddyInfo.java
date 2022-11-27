@@ -26,6 +26,14 @@ public class BuddyInfo {
         return name;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhone() {
+        return number;
+    }
+
     public static void main(String[] args) {
         BuddyInfo buddy = new BuddyInfo("Nabeel Hesa", "None", "None");
         System.out.println("Hello" + " " + buddy.getName());

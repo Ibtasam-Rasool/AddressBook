@@ -27,11 +27,19 @@ public class AddressBookFrame extends JFrame implements ListDataListener {
 
         JMenuItem removeOption = new JMenuItem("REMOVE SELECTED BUDDY");
         JMenuItem addBuddy = new JMenuItem("ADD BUDDY");
+        JMenuItem viewBuddy = new JMenuItem("VIEW SELECTED BUDDY INFO");
         addressBookMenu.add(removeOption);
+        addressBookMenu.add(viewBuddy);
         buddyInfoMenu.add(addBuddy);
 
         buddyInfoJList.addListSelectionListener(e -> addressBook.setSelectedBuddyInfo(buddyInfoJList.getSelectedValue()));
         removeOption.addActionListener(e -> addressBook.removeBuddy());
+        viewBuddy.addActionListener(e -> {
+            if(addressBook.getSelectedBuddy() != null){
+                BuddyInfo buddy = addressBook.getSelectedBuddy();
+                JOptionPane.showMessageDialog(this,"NAME: " + buddy.getName() + "\nADDRESS: " + buddy.getAddress() + "\nPHONE: " + buddy.getPhone(),buddy.getName() + "'s information", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
         addBuddy.addActionListener(e -> {
 
             JTextField nameField = new JTextField();
