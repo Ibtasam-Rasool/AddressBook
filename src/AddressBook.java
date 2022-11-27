@@ -5,6 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Stream;
 
+import static org.junit.Assert.assertTrue;
+
 public class AddressBook extends DefaultListModel<BuddyInfo> {
 
     private BuddyInfo selectedBuddyInfo;
@@ -62,6 +64,24 @@ public class AddressBook extends DefaultListModel<BuddyInfo> {
 
         return addressBook;
 
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        AddressBook addressBook = (AddressBook) obj;
+
+        if(!(this.size() == addressBook.size())){
+            return false;
+        };
+
+        for(int i = 0; i < this.size(); i++){
+
+            if (!(addressBook.getElementAt(i).equals(this.getElementAt(i)))){
+                return false;
+            }
+
+        }
+        return true;
     }
 
     public void makeCurrentImported(AddressBook addressBook){

@@ -31,6 +31,18 @@ public class BuddyInfo {
         return getName();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        BuddyInfo buddyInfo = (BuddyInfo) obj;
+        if(buddyInfo.getAddress().equals(address) && buddyInfo.getName().equals(name) && buddyInfo.getPhone().equals(number)){
+
+            return true;
+
+        }
+        return false;
+    }
+
+
 
     public String toOutPutString() {
         return getName() + "#" + getAddress() + "#" + getPhone();
