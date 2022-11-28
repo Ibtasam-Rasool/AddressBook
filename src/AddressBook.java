@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 
 import static org.junit.Assert.assertTrue;
 
-public class AddressBook extends DefaultListModel<BuddyInfo> {
+public class AddressBook extends DefaultListModel<BuddyInfo> implements Serializable {
 
     private BuddyInfo selectedBuddyInfo;
     private boolean isBuddySelected;
@@ -41,7 +41,7 @@ public class AddressBook extends DefaultListModel<BuddyInfo> {
         isBuddySelected = true;
     }
 
-    public void save(String fileName) throws Exception{
+    public void save(String fileName) throws Exception{     //for text file
 
         FileWriter writer = new FileWriter(fileName);
         BufferedWriter p = new BufferedWriter(writer);
@@ -53,7 +53,37 @@ public class AddressBook extends DefaultListModel<BuddyInfo> {
         p.close();
     }
 
-    public static AddressBook importAddressBook(String fileName) throws Exception {
+    public static void writeObject(AddressBook addressBook, String fileName) throws Exception{      //for serialization
+
+        FileOutputStream os = new FileOutputStream(fileName);
+
+        ObjectOutputStream oos = new ObjectOutputStream(os);
+
+        oos.writeObject(addressBook);
+
+        oos.flush();
+        os.close();
+
+
+    }
+
+    public static AddressBook readObject(String fileName) throws Exception{     //for serialization
+
+        FileInputStream fis = new FileInputStream(fileName);
+
+        ObjectInputStream ois = new ObjectInputStream(fis);
+
+        AddressBook addressBook;
+
+        addressBook = (AddressBook) ois.readObject();
+
+        fis.close();
+
+        return addressBook;
+
+    }
+
+    public static AddressBook importAddressBook(String fileName) throws Exception {     // for text file
         AddressBook addressBook = new AddressBook();
         BufferedReader in = new BufferedReader(new FileReader(fileName));
         String strCurrentLine;
@@ -128,6 +158,34 @@ public class AddressBook extends DefaultListModel<BuddyInfo> {
         System.out.println(info.getAddress());
         System.out.println(info.getPhone());
          */
+
+        AddressBook book = new AddressBook();
+        BuddyInfo mahad = new BuddyInfo("Mahad", "Atlanta", "4333321326");
+        BuddyInfo mahad2 = new BuddyInfo("Mahad", "Atlanta", "4333321326");
+        BuddyInfo mahad3 = new BuddyInfo("Mahad", "Atlanta", "4333321326");
+        book.addBuddy(mahad);
+        book.addBuddy(mahad2);
+        book.addBuddy(mahad3);
+
+        try {
+            AddressBook.writeObject(book,"test.bin");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            AddressBook addressBook = AddressBook.readObject("test.bin");
+            System.out.println(addressBook.getElementAt(0).getPhone());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+
+
+
+
 
     }
 

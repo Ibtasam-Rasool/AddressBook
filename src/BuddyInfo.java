@@ -1,7 +1,10 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class BuddyInfo {
+public class BuddyInfo implements Serializable {
 
+
+    private static final long serialVersionUID = 1L;
     private String name;
     private String address;
     private String number;
@@ -28,7 +31,7 @@ public class BuddyInfo {
 
     @Override
     public String toString() {
-        return getName();
+        return name;
     }
 
     @Override
@@ -41,6 +44,8 @@ public class BuddyInfo {
         }
         return false;
     }
+
+
 
 
 

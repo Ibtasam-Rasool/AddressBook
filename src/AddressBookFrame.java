@@ -20,16 +20,20 @@ public class AddressBookFrame extends JFrame implements ListDataListener {
         this.setJMenuBar(menuBar);
 
         JMenu fileMenu = new JMenu("File");
+        JMenu serMenu = new JMenu("Serialization");
         JMenu addressBookMenu = new JMenu("Address Book");
         JMenu buddyInfoMenu = new JMenu("Buddy Info");
 
         menuBar.add(fileMenu);
+        menuBar.add(serMenu);
         menuBar.add(addressBookMenu);
         menuBar.add(buddyInfoMenu);
 
 
         JMenuItem exportOption = new JMenuItem("Export");
         JMenuItem importOption = new JMenuItem("Import");
+        JMenuItem serOption = new JMenuItem("Serialize");
+        JMenuItem unserOption = new JMenuItem("UnSerialize");
         JMenuItem removeOption = new JMenuItem("Remove Selected Buddy");
         JMenuItem addBuddy = new JMenuItem("Add Buddy");
         JMenuItem viewBuddy = new JMenuItem("View Selected Buddy Info");
@@ -39,6 +43,8 @@ public class AddressBookFrame extends JFrame implements ListDataListener {
         buddyInfoMenu.add(addBuddy);
         fileMenu.add(exportOption);
         fileMenu.add(importOption);
+        serMenu.add(serOption);
+        serMenu.add(unserOption);
 
         buddyInfoJList.addListSelectionListener(e -> addressBook.setSelectedBuddyInfo(buddyInfoJList.getSelectedValue()));
         removeOption.addActionListener(e -> addressBook.removeBuddy());
@@ -95,22 +101,37 @@ public class AddressBookFrame extends JFrame implements ListDataListener {
             }
 
         });
+        serOption.addActionListener(e -> {
 
+            try {
+                AddressBook.writeObject(addressBook, (JOptionPane.showInputDialog(this, "Please Enter FileName"))) ;
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+
+        });
+        unserOption.addActionListener(e -> {
+            String fileName = (JOptionPane.showInputDialog(this, "Please Enter FileName To Import From"));
+            if(fileName != null) {
+                try {
+                    addressBook.makeCurrentImported(AddressBook.readObject(fileName));
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
 
         this.setSize(400, 400);
         this.setVisible(true);
 
     }
 
-
     public static void main(String[] args) {
         AddressBookFrame addressBookFrame = new AddressBookFrame();
-
     }
 
     @Override
     public void intervalAdded(ListDataEvent e) {
-
 
     }
 

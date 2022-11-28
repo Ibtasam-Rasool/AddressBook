@@ -25,4 +25,15 @@ public class AddressBookTest {
 
     }
 
+    @org.junit.Test
+    public void importExportSerialization() throws Exception{
+
+        String fileName = "buddy_addresses_test.bin";
+        AddressBook.writeObject(addressBook, fileName);
+        AddressBook addressBook1 = AddressBook.readObject(fileName);
+
+        assertTrue(addressBook1.equals(addressBook));
+
+    }
+
 }
